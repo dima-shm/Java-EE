@@ -1,0 +1,22 @@
+<project name="Lab_1" default = "copy" >
+    <target name="init">
+        <echo message="Building Lab_1 Project" />
+        <property name="server_dir"  value="C:\Program Files\Apache\Tomcat 9.0\webapps\Lab_1\" />
+        <property name="project_dir" value="D:\GitHub\Java-EE\Lab_1\" />
+    </target>
+
+    <target name="create" depends ="init">
+        <delete dir="${server_dir}" />
+        <mkdir  dir="${server_dir}" />
+        <mkdir  dir="${server_dir}WEB-INF\" />
+        <mkdir  dir="${server_dir}src\res\images\" />
+    </target>
+
+    <target name="copy" depends="create">
+        <copy file= "${project_dir}WEB-INF\web.xml"          todir="${server_dir}WEB-INF\" />
+        <copy file= "${project_dir}src\html\index.html"      todir="${server_dir}" />
+        <copy file= "${project_dir}src\html\address.html"    todir="${server_dir}" />
+        <copy file= "${project_dir}src\html\education.html"  todir="${server_dir}" />
+        <copy file= "${project_dir}src\res\images\panda.bmp" todir="${server_dir}src\res\images\" />
+    </target>
+</project>
