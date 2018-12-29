@@ -1,0 +1,48 @@
+<project name = "DrekoAS6" default = "copy">
+
+    <target name = "init">
+        <echo message = "Building Project DrekoAS6" />
+        <property name = "server_dir_name" value = "C:\Apache\apache-tomcat-9.0.4\webapps\" />
+        <property name = "workspace" value = "D:\Internet\DrekoAS6\" />
+        <property name = "app_name" value = "DrekoAS6" />
+    </target>
+
+    <target name = "compile" depends = "init">
+        <delete verbose = "true">
+            <fileset dir = "${workspace}build" />
+        </delete>
+
+        <javac srcdir = "${workspace}\src"
+               destdir = "${workspace}\build">
+            <classpath>
+                <fileset file="${workspace}web\WEB-INF\lib\javax.servlet-api-3.0.1.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="create" depends ="compile">
+        <delete dir = "${server_dir_name}${app_name}\" />
+        <mkdir dir = "${server_dir_name}${app_name}\" />
+        <mkdir dir = "${server_dir_name}${app_name}\WEB-INF" />
+        <mkdir dir = "${server_dir_name}${app_name}\WEB-INF\lib" />
+    </target>
+
+    <target name = "copy" depends = "create">
+        <copy file = "${workspace}web\WEB-INF\web.xml"
+              todir = "${server_dir_name}${app_name}\WEB-INF\" />
+
+        <copy todir = "${server_dir_name}${app_name}\">
+            <fileset dir = "${workspace}web\" />
+        </copy>
+
+
+
+        <copy todir = "${server_dir_name}${app_name}\WEB-INF\classes">
+            <fileset dir = "${workspace}build" />
+        </copy>
+
+        <copy todir = "${server_dir_name}${app_name}\WEB-INF\lib">
+            <fileset dir = "web/WEB-INF/lib" />
+        </copy>
+    </target>
+</project>
