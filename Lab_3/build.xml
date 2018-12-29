@@ -1,0 +1,48 @@
+<project name="Lab_3" default = "copy" >
+
+<target name="init">
+	<echo message="Building Lab_3 Project" />
+	<property name="server_dir"  value="C:\Program Files\Apache\Tomcat 9.0\webapps\Lab_3\" />
+	<property name="project_dir" value="D:\GitHub\Java-EE\Lab_3\" />
+</target>
+
+<target name="compile" depends ="init">
+	<delete verbose ="true">
+		<fileset dir="${project_dir}build"/>
+	</delete>
+	<javac srcdir = "${project_dir}src" 
+		destdir = "${project_dir}build">
+		<classpath>
+			<fileset file= "C:\Program Files\Apache\Tomcat 9.0\lib\servlet-api.jar" />
+			<fileset file= "C:\Program Files\Apache\Tomcat 9.0\lib\org.apache.commons.httpclient.jar" />
+			<fileset file= "C:\Program Files\Apache\Tomcat 9.0\lib\org-apache-commons-logging.jar" />
+		</classpath>
+	</javac>
+</target>
+
+<target name="create" depends ="compile">
+	<delete dir= "${server_dir}" />
+	<mkdir dir= "${server_dir}" />
+	<mkdir dir= "${server_dir}WEB-INF\" />
+	<mkdir dir= "${server_dir}WEB-INF\lib" />
+</target>
+
+<target name="copy" depends ="create">
+	<copy file= "${project_dir}web\WEB-INF\web.xml"
+		todir="${server_dir}WEB-INF\" />
+	<copy todir= "C:\Program Files\Apache\Tomcat 9.0\lib">
+		<fileset dir="${server_dir}WEB-INF\lib" /></copy>
+	<copy file= "${project_dir}web\index.html"
+		todir="${server_dir}" />
+	<copy file= "${project_dir}web\persondata.html"
+		todir="${server_dir}" />
+	<copy file= "${project_dir}web\persondataD.html"
+		todir="${server_dir}" />
+	<copy todir="${server_dir}WEB-INF\classes">
+		<fileset dir="${project_dir}build"/>
+	</copy>
+	<copy todir = "${server_dir}WEB-INF\lib">
+		<fileset dir = "${project_dir}web\WEB-INF\lib" />
+	</copy>
+	</target>
+</project>
