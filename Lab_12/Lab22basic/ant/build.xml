@@ -1,0 +1,43 @@
+<project name="Lab22basic" default="copy">
+	
+	<target name="init">
+		<echo message="Building Lab22basic"/>
+		
+		<property name = "server" value = "C:\Program Files\Apache\Tomcat 9.0\"/>
+		<property name = "work" value = "C:\Users\dimas\Desktop\Lab22form\"/>  
+	</target>
+	
+	<target name="compile" depends ="init">
+		<delete verbose ="true">
+			<fileset dir="${work}build"/>
+		</delete>
+		
+		<javac srcdir = "${work}src"
+			destdir = "${work}build">
+			<classpath>
+				<fileset file= "${server}lib\javax.servlet-api-3.0.1.jar" />
+				<fileset file = "${work}WEB-INF\lib\"/>
+			</classpath>
+		</javac>
+	</target> 
+	
+	<target name="create" depends="compile">
+		<delete dir="${server}webapps\Lab22basic\"/>
+		<mkdir dir="${server}webapps\Lab22basic\"/>
+		<mkdir dir="${server}webapps\Lab22basic\WEB-INF"/>
+	</target>
+	
+	<target name="copy" depends="create">
+		<copy file="${work}WEB-INF\web.xml"
+			todir="${server}webapps\Lab22basic\WEB-INF\"/>
+			
+		<copy todir="${server}webapps\Lab22basic\">
+			<fileset dir="${work}jsp" />
+		</copy>
+			
+		<copy todir="${server}webapps\Lab22basic\WEB-INF\classes"> 
+			<fileset dir="${work}build"/> 
+		</copy>
+	</target>
+
+</project>
