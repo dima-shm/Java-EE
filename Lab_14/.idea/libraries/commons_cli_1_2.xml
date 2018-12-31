@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="commons-cli-1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/httpcomponents-core-4.4.9-bin/httpcomponents-core-4.4.9/lib/commons-cli-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/httpcomponents-core-4.4.9-bin/httpcomponents-core-4.4.9/lib/httpcore-4.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/httpcomponents-core-4.4.9-bin/httpcomponents-core-4.4.9/lib/httpcore-ab-4.4.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/httpcomponents-core-4.4.9-bin/httpcomponents-core-4.4.9/lib/httpcore-nio-4.4.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
