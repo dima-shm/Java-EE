@@ -1,0 +1,43 @@
+<project name="lab_11" default = "copy" >
+
+  <target name="init">
+    <echo message="Build lab_11 Project" />
+    <property name = "server"
+              value = "C:\Program Files\Apache\Tomcat 9.0\" />
+    <property name = "work"
+              value = "C:\Users\dimas\Desktop\Java EE\lab_11\" />
+  </target>
+
+  <target name="compile" depends ="init">
+    <delete verbose ="true">
+      <fileset dir="${work}build"/>
+    </delete>
+    <javac srcdir = "${work}src"
+           destdir = "${work}\build"
+           classpath = "${server}lib\servlet-api.jar:${server}lib\commons-httpclient-3.1.jar"/>
+  </target>
+
+  <target name="create" depends ="compile">
+    <delete dir= "${server}webapps\lab_11\" />
+    <mkdir dir= "${server}webapps\lab_11\" />
+    <mkdir dir= "${server}webapps\lab_11\WEB-INF" />
+    <mkdir dir= "${server}webapps\lab_11\WEB-INF\classes" />
+    <mkdir dir= "${server}webapps\lab_02\scripts" />
+  </target>
+
+  <target name="copy" depends ="create">
+    <!--Web.xml-->
+ <copy file= "${work}WEB-INF\web.xml"
+          todir="${server}webapps\lab_11\WEB-INF\" />
+
+    <!--HTML-->
+    <copy todir="${server}webapps\lab_11\" >
+      <fileset dir="${work}\html"/>
+    </copy>
+
+    <!--Classes-->
+    <copy todir="${server}webapps\lab_11\WEB-INF\classes">
+      <fileset dir="${work}build"/>
+    </copy>
+  </target>
+</project>
